@@ -33,7 +33,7 @@ $$f^{*} = arg max_{f \in F} T(D, F)$$
 
 既然是non-explicit programming，不是直接解决问题的算法，那么机器学习算法又代表着什么呢？
 
-$$f_{0} \rightarrow f_{1} \rightarrow f_{2} \rightarrow ... \rightarrow f_^{*}$$
+$$ f_{0} \rightarrow f_{1} \rightarrow f_{2} \rightarrow ... \rightarrow f^{*} $$
 
 上述寻找最优模型的过程就是机器学习，机器学习算法对应着从$f_{i}$迭代到$f_{i + 1}$的程序。
 
