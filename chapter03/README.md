@@ -16,3 +16,6 @@ samples = samples[shuffle_indices]
 labels = labels[shuffle_indices]
 ```
 shuffle的逻辑，python写法很简单。最后的赋值类似a[0] = a[9]
+
+KNN的实现细节
+  - k and label num are prior knowledge. 
