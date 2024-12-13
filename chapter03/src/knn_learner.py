@@ -78,6 +78,3 @@ def main():
     print(k, accuray)
 
 main()
-
-
-
