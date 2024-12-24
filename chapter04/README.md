@@ -18,3 +18,29 @@
 - 这里的问题是，total sample = feature + tag，这个tag应该是ctr。那这个东西从哪拿呢？
 - ctr = click / view. click/view是用户的行为，所以对于total sample来说ctr是tag，没问题。
 - 但是它以另一种形式体现出来。所以，推荐系统里面也说tag是click/view这些东西。
+
+## Feature
+
+这里稍微延伸一下，feature又是什么？RS 里面的这个raw feature/result feature又是什么？为什么要这么做。
+
+>In machine learning and pattern recognition, a feature is an individual measurable property or characteristic of a data set.[1] 
+Choosing informative, discriminating, and independent features is crucial to produce effective algorithms for pattern recognition, classification, and regression tasks.
+
+From the definition of feature from wikipedia, we know that feature is an individual mesurable property of a data set which is informative, discriminating, crucial for model.
+
+这个定义解释了feature，简单说，feature这个概念必须相对特定的模型来说。对特定模型来说，有用的数据特性，可以认为是特征。
+
+
+## Feature Engineering
+
+这里回答另一个问题，就是raw feature/result feature，这些东西又是什么？为什么要这么做。
+
+wikipedia把feature extraction redirect to feature engineering，证明这两说的是一回事。
+
+>Feature engineering is a preprocessing step in supervised machine learning and statistical modeling[1] which transforms raw data into a more effective set of inputs.
+By providing models with relevant information, feature engineering significantly enhances their predictive accuracy and decision-making capability.
+
+第一句话说的是feature extraction. transform raw feature to a more effective features. 这里有些我理解是必须的，比如non-numeric types，还有处理不同的量纲。
+
+第二句话说的是feature selection. By providing models with relevant information, 这个relevant information很重要。血糖预测，身高，体重，血型，国籍，这么多特征，到底哪个对预测有作用呢？
+这个是feature selection做的事情。
