@@ -25,7 +25,10 @@ def load_samples():
     train, test = lines[:split], lines[split:]
 
     # A raw sample
-    # print(train[0])
+    print('----- This is an raw sample. -----')
+    print(train[0])
+
+    return train, test
 
 # The function is used to simulate feature extraction.
 # From the process, raw features can be transformed to a more
@@ -35,7 +38,7 @@ def feature_extraction(train, test):
     # It's a process of feature extraction.
     # Transform raw data in a more effective set of inputs.
     #
-    # Standardization.(Make data conform to normalization.)
+    # Standardization.(Make data conform to normal distribution)
     # This technique to rescale features value with the distribution value between 0 and 1 is useful for the optimization algorithms,
     # such as gradient descent, that are used within machine-learning algorithms that weight inputs
     scaler = StandardScaler()
@@ -44,7 +47,10 @@ def feature_extraction(train, test):
     test = scaler.transform(test)
 
     # A result sample
+    print('----- This is an result sample. -----')
     print(train[0])
+
+    return train, test
 
 # The function is used to simulate splitting input features and labels
 # from the total samples.
@@ -53,6 +59,23 @@ def split_total_sample(train, test):
     x_train, y_train = train[:, :-1], train[:, -1].flatten()
     x_test, y_test = test[:, :-1], test[:, -1].flatten()
 
+    print('----- Features -----')
+    print(x_train)
+    print('----- Labels -----')
+    print(y_train)
+
+    return x_train, y_train, x_test, y_test
+
 # The function is used to simulate training process of model based on training data of X and Y.
 def train_model(x_train, y_train):
-    x_train
+    ## Add const coeffcient
+    X = np.concatenate([x_train, np.ones((len(x_train), 1))], axis=-1)
+
+
+def total_offline_training_process():
+    train, test = load_samples()
+    train, test = feature_extraction(train, test)
+    x_train, y_train, x_test, y_test = split_total_sample(train, test)
+    train_model(x_train, y_train)
+
+total_offline_training_process()
