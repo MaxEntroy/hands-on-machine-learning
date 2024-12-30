@@ -1,4 +1,4 @@
-## chapter04 线性回归
+# chapter04 Linear regression.
 
 ## Basic
 
@@ -44,3 +44,29 @@ By providing models with relevant information, feature engineering significantly
 
 第二句话说的是feature selection. By providing models with relevant information, 这个relevant information很重要。血糖预测，身高，体重，血型，国籍，这么多特征，到底哪个对预测有作用呢？
 这个是feature selection做的事情。
+
+## Model training.
+
+- 机器学习派别 vs 统计派别
+  - 核心差异在于：参数的求解思路。注意，这里区别的是思路。不是方法。不管机器学习派别还是统计派别，最后参数求解的方法都是转化为最优化求解。
+  - 机器学习派别求解思路：确定线性模型。但是对于参数求解没有先验知识。
+    - 定义loss function. 这个是参数的函数。(X, Y)在这个函数中被是做常数。
+    - 通过求解loss function的最小值，拿到参数的解。
+  - 统计派别求解思路：确定线性模型。但是对于参数求解有先验支持。
+    - **先验信息**，噪声服从某一个分布。此时，可以拿到y的分布。
+    - 注意，此时有(x, y)观测值。那就说明这个事情发生了，likelihood function代入这组观测值，应该可以拿到最大值。
+    - 似然函数是参数的参数。(X, Y)在这个函数中被做看做常数。
+    - 通过求解likelihood function的最大值，拿到参数的解。
+  - 思路的区别，其实就是这个optimize function的区别，前者loss function. 后者likelihood function.
+
+## Frequentist vs Bayesian
+
+这个到不是重点，不过我也展开下。还是对于linear regression这个模型来说。
+
+参数求解的思路是一样的。都是likelihood function. 
+
+- frequentist
+  - 对于参数没有先验，噪声有。借此，可以拿到一个y的分布。可以表达成likelihood function.
+- bayesian
+  - 对于参数有先验。还是可有你妈到一个y的分布。此时是P(y|w), w是有先验的。也可以表达成likelihood function.
+- 这二者的likelihood function不一样。

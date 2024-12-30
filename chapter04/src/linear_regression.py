@@ -12,16 +12,18 @@ def load_samples():
     lines = np.loadtxt('USA_Housing.csv', delimiter=',', dtype='str')
     header = lines[0]
     lines = lines[1:].astype(float)
-    print('数据特征：', ', '.join(header[:-1]))
-    print('数据标签：', header[-1])
-    print('数据总条数：', len(lines))
-    print('-------------------')
+    print('raw sample features：', '｜'.join(header[:-1]))
+    print('raw sample label：', header[-1])
+    print('number of total raw samples：', len(lines))
 
     # get training set and test set.
     ratio = 0.8
     split = int(len(lines) * ratio)
+
+    # shuffle raw samples
     np.random.seed(0)
-    lines = np.random.permutation(lines)  # shuffle lines
+    lines = np.random.permutation(lines)
+
     train, test = lines[:split], lines[split:]
 
     # A raw sample
@@ -33,7 +35,7 @@ def load_samples():
 # The function is used to simulate feature extraction.
 # From the process, raw features can be transformed to a more
 # effective set of inputs.
-# In real-time rs, label is not necessary to do the feature extraction.
+# In real-time rs, label is not necessary for feature extraction.
 def feature_extraction(train, test):
     # It's a process of feature extraction.
     # Transform raw data in a more effective set of inputs.
@@ -42,7 +44,7 @@ def feature_extraction(train, test):
     # This technique to rescale features value with the distribution value between 0 and 1 is useful for the optimization algorithms,
     # such as gradient descent, that are used within machine-learning algorithms that weight inputs
     scaler = StandardScaler()
-    scaler.fit(train)  # 只使用训练集的数据计算均值和方差
+    scaler.fit(train)  #  mean and variance are calculated only by training set.
     train = scaler.transform(train)
     test = scaler.transform(test)
 
@@ -63,6 +65,7 @@ def split_total_sample(train, test):
     print(x_train)
     print('----- Labels -----')
     print(y_train)
+    print('------------------')
 
     return x_train, y_train, x_test, y_test
 
@@ -70,6 +73,7 @@ def split_total_sample(train, test):
 def train_model(x_train, y_train):
     ## Add const coeffcient
     X = np.concatenate([x_train, np.ones((len(x_train), 1))], axis=-1)
+    print (X)
 
 
 def total_offline_training_process():
