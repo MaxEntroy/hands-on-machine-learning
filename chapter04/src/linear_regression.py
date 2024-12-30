@@ -73,13 +73,26 @@ def split_total_sample(train, test):
 def train_model(x_train, y_train):
     ## Add const coeffcient
     X = np.concatenate([x_train, np.ones((len(x_train), 1))], axis=-1)
-    print (X)
+    theta = np.linalg.inv(X.T @ X) @ X.T @ y_train
+    print('--------- Final theta ---------')
+    print(theta)
+    return theta
 
+# After training process is finished, a new model is updated.
+# The new model's effectiveness should be evaluated.
+# Apply the theta to test set.
+def effectiveness_evaluation(theta, x_test, y_test):
+    X_test = np.concatenate([x_test, np.ones((len(x_test), 1))], axis=-1)
+    y_pred = X_test @ theta
+
+    rsme_loss = np.sqrt( np.square(y_test  - y_pred).mean() )
+    print('RSME:', rsme_loss)
 
 def total_offline_training_process():
     train, test = load_samples()
     train, test = feature_extraction(train, test)
     x_train, y_train, x_test, y_test = split_total_sample(train, test)
-    train_model(x_train, y_train)
+    theta = train_model(x_train, y_train)
+    effectiveness_evaluation(theta, x_test, y_test)
 
 total_offline_training_process()

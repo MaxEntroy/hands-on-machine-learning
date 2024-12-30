@@ -59,6 +59,14 @@ By providing models with relevant information, feature engineering significantly
     - 通过求解likelihood function的最大值，拿到参数的解。
   - 思路的区别，其实就是这个optimize function的区别，前者loss function. 后者likelihood function.
 
+y = a1x1 + a2x2 + a3x3 + b，theta = (a1, a2, a3), X = (x1, x2, x3)。这么写的问题是，形式不统一。
+
+上面的式子，可以转化为：
+
+y = a1x1 + a2x2 + a3x3 + a4*1, theta = (a1, a2, a3, b), X = (x1, x2, x3, 1)
+
+这样便于求解全部参数。否则 b = y - theta*x，需要两步。这也是代码里对于x扩充的原因
+
 ## Frequentist vs Bayesian
 
 这个到不是重点，不过我也展开下。还是对于linear regression这个模型来说。
